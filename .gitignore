@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Ignore Visual Studio files
-.vs
+.vs/
