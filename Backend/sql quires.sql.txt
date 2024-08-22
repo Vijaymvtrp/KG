@@ -1,0 +1,114 @@
+------------------------------rooms table---------------------------
+
+
+CREATE TABLE public.Rooms (
+    Room_Id SERIAL PRIMARY KEY, 
+    Floor INT NOT NULL,         
+    Room_Type VARCHAR(255),      
+    Guest_Allowed INT NOT NULL,   
+    Status VARCHAR(255),         
+    Room_price NUMERIC(10,2) NOT NULL,  
+    Tax NUMERIC(10,2)  NOT NULL,        
+    Discount NUMERIC(10,2),
+	Available_status varchar(100)
+);
+
+INSERT INTO public.Rooms (Floor, Room_Type, Guest_Allowed, Status, Room_price, Tax, Discount, Available_status)
+VALUES
+    (1, 'Single', 1, 'Available', 100.00, 10.00, 5.00, 'Yes'),
+    (1, 'Double', 2, 'Occupied', 150.00, 15.00, 10.00, 'No'),
+    (2, 'Suite', 4, 'Available', 300.00, 30.00, 20.00, 'Yes'),
+    (2, 'Single', 1, 'Available', 110.00, 11.00, 5.50, 'Yes'),
+    (3, 'Double', 2, 'Maintenance', 160.00, 16.00, 8.00, 'No'),
+    (3, 'Suite', 3, 'Available', 320.00, 32.00, 25.00, 'Yes'),
+    (4, 'Single', 1, 'Occupied', 120.00, 12.00, 6.00, 'No'),
+    (4, 'Double', 2, 'Available', 170.00, 17.00, 7.00, 'Yes'),
+    (5, 'Suite', 4, 'Available', 310.00, 31.00, 15.00, 'Yes'),
+    (5, 'Single', 1, 'Occupied', 130.00, 13.00, 5.00, 'No');
+
+
+select * from rooms
+------------------------------------Rooms table end -------------------------------------------------------------------------------------------
+
+----------------------bookings table starts ---------------------------------------------------------------------------------------
+CREATE TABLE Bookings (
+    Booking_Id SERIAL PRIMARY KEY,
+    Room_Id INTEGER REFERENCES Rooms(Room_id),
+    Floor INTEGER NOT NULL,
+    Room VARCHAR(255),
+    Room_Type VARCHAR(255),
+    Guest_Allowed INTEGER NOT NULL,
+    User_Name VARCHAR(255),
+    Mobile_Number VARCHAR(20),
+    Checkin_Day TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    Checkout_Day TIMESTAMP WITHOUT TIME ZONE NOT NULL,
+    Days INTEGER NOT NULL,
+    Room_Price DOUBLE PRECISION NOT NULL,
+    Total_Amount DOUBLE PRECISION NOT NULL,
+    Amount_Status VARCHAR(50),
+    Advance_Remaining DOUBLE PRECISION NOT NULL,
+	Available_Status VARCHAR(100)
+);
+
+
+
+
+-- Inserting 10 rows of dummy data into the Bookings table
+INSERT INTO Bookings (
+    Room_Id, Floor, Room, Room_Type, Guest_Allowed, User_Name, Mobile_Number, Checkin_Day, Checkout_Day, Days, Room_Price, Total_Amount, Amount_Status, Advance_Remaining, Available_Status
+)
+VALUES
+    (1, 1, '101', 'Single', 1, 'John Doe', '123-456-7890', '2024-08-20 14:00:00', '2024-08-21 11:00:00', 1, 100.00, 100.00, 'Paid', 50.00, 'No'),
+    (2, 1, '102', 'Double', 2, 'Jane Smith', '987-654-3210', '2024-08-22 15:00:00', '2024-08-25 11:00:00', 3, 150.00, 450.00, 'Unpaid', 0.00, 'Yes'),
+    (3, 2, '201', 'Suite', 4, 'Alice Johnson', '555-123-4567', '2024-09-01 14:00:00', '2024-09-07 11:00:00', 6, 300.00, 1800.00, 'Paid', 200.00, 'No'),
+    (4, 2, '202', 'Single', 1, 'Bob Brown', '555-765-4321', '2024-09-10 14:00:00', '2024-09-12 11:00:00', 2, 110.00, 220.00, 'Unpaid', 110.00, 'Yes'),
+    (5, 3, '301', 'Double', 2, 'Carol White', '555-987-6543', '2024-09-15 15:00:00', '2024-09-18 11:00:00', 3, 160.00, 480.00, 'Paid', 100.00, 'No'),
+    (1, 1, '101', 'Single', 1, 'David Black', '555-111-2222', '2024-10-01 14:00:00', '2024-10-02 11:00:00', 1, 100.00, 100.00, 'Paid', 50.00, 'No'),
+    (2, 1, '102', 'Double', 2, 'Emma Green', '555-333-4444', '2024-10-05 15:00:00', '2024-10-07 11:00:00', 2, 150.00, 300.00, 'Unpaid', 150.00, 'Yes'),
+    (3, 2, '201', 'Suite', 4, 'Frank Blue', '555-555-6666', '2024-10-10 14:00:00', '2024-10-15 11:00:00', 5, 300.00, 1500.00, 'Paid', 300.00, 'No'),
+    (4, 2, '202', 'Single', 1, 'Grace Yellow', '555-777-8888', '2024-10-20 14:00:00', '2024-10-21 11:00:00', 1, 110.00, 110.00, 'Unpaid', 60.00, 'Yes'),
+    (5, 3, '301', 'Double', 2, 'Hank Red', '555-999-0000', '2024-11-01 15:00:00', '2024-11-05 11:00:00', 4, 160.00, 640.00, 'Paid', 200.00, 'No');
+
+
+select * from bookings
+
+-----------------bookings ends-------------------------------------------------
+
+-----------------------------Transactions-----------------------------------------------------
+CREATE TABLE Transactions(
+	Id SERIAL PRIMARY KEY,
+	Transaction_Id VARCHAR(255),
+	Amount NUMERIC(10,2) NOT NULL,
+	Amount_Paid_Date TIMESTAMP WITHOUT TIME ZONE,
+	Status VARCHAR(100) NOT NULL,
+	Payment_Mode VARCHAR(255) NOT NULL,
+	Available_Status VARCHAR(100)
+);
+
+
+-- Inserting dummy data into the Transactions table
+INSERT INTO Transactions (
+    Transaction_Id, Amount, Amount_Paid_Date, Status, Payment_Mode, Available_Status
+)
+VALUES
+    ('TXN001', 100.00, '2024-08-20 14:30:00', 'Completed', 'Credit Card', 'Available'),
+    ('TXN002', 150.00, '2024-08-22 16:00:00', 'Pending', 'Debit Card', 'Available'),
+    ('TXN003', 300.00, '2024-09-01 12:00:00', 'Completed', 'Cash', 'Not Available'),
+    ('TXN004', 220.00, '2024-09-10 09:30:00', 'Failed', 'Bank Transfer', 'Available'),
+    ('TXN005', 480.00, '2024-09-15 15:00:00', 'Completed', 'Credit Card', 'Available'),
+    ('TXN006', 100.00, '2024-10-01 10:00:00', 'Completed', 'Cash', 'Available'),
+    ('TXN007', 300.00, '2024-10-05 11:30:00', 'Pending', 'Debit Card', 'Not Available'),
+    ('TXN008', 150.00, '2024-10-10 14:45:00', 'Completed', 'Credit Card', 'Available'),
+    ('TXN009', 640.00, '2024-10-20 17:00:00', 'Completed', 'Bank Transfer', 'Available'),
+    ('TXN010', 110.00, '2024-11-01 13:15:00', 'Failed', 'Debit Card', 'Not Available');
+	
+	
+select * from transactions
+
+-------------------------transactions end here ----------------------------------------------------------------------------
+--------------------------------------Bookings by room -----------------------------------------
+SELECT r.Room_Id, r.Floor, r.Guest_Allowed, 
+       b.Room_Id, b.Booking_Id, b.Room, b.Room_Type, b.Mobile_Number
+FROM Rooms AS r
+INNER JOIN Bookings AS b
+ON b.Room_Id = r.Room_Id
