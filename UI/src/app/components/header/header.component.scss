@@ -1,0 +1,40 @@
+.headerConatiner{
+    background: #fff;
+    padding: 10px;
+    display: block;
+    // position: fixed;
+    width: 100%;
+    position: relative;
+
+    .header {
+        display: flex;
+        .logo {
+            flex: 1;
+            .logoImg{
+                max-width: 180px;
+            }
+        }
+        .icon{
+            img{
+                width: 30px;
+                height: 30px;
+                background: #c4d5f6;
+                padding: 5px;
+                border-radius: 50%;
+                margin: 0 10px;
+                vertical-align: -webkit-baseline-middle;
+            }
+        }
+        .searchBar{
+            .form-inline{
+                display: flex;
+                .searchIconButton{
+                    border: none;
+                    background: transparent;
+                    right: 40px;
+                    position: relative;
+                }
+            }
+        }
+    }
+}
