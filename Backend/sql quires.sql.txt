@@ -85,30 +85,69 @@ CREATE TABLE Transactions(
 	Available_Status VARCHAR(100)
 );
 
+ALTER TABLE transactions ADD COLUMN booking_id int;
+
+ALTER TABLE transactions ADD CONSTRAINT FK_TRANSACTIONOFROOM FOREIGN KEY(booking_id) references bookings(booking_id);
+
 
 -- Inserting dummy data into the Transactions table
 INSERT INTO Transactions (
-    Transaction_Id, Amount, Amount_Paid_Date, Status, Payment_Mode, Available_Status
+    Transaction_Id, Amount, Amount_Paid_Date, Status, Payment_Mode, Available_Status,booking_id
 )
 VALUES
-    ('TXN001', 100.00, '2024-08-20 14:30:00', 'Completed', 'Credit Card', 'Available'),
-    ('TXN002', 150.00, '2024-08-22 16:00:00', 'Pending', 'Debit Card', 'Available'),
-    ('TXN003', 300.00, '2024-09-01 12:00:00', 'Completed', 'Cash', 'Not Available'),
-    ('TXN004', 220.00, '2024-09-10 09:30:00', 'Failed', 'Bank Transfer', 'Available'),
-    ('TXN005', 480.00, '2024-09-15 15:00:00', 'Completed', 'Credit Card', 'Available'),
-    ('TXN006', 100.00, '2024-10-01 10:00:00', 'Completed', 'Cash', 'Available'),
-    ('TXN007', 300.00, '2024-10-05 11:30:00', 'Pending', 'Debit Card', 'Not Available'),
-    ('TXN008', 150.00, '2024-10-10 14:45:00', 'Completed', 'Credit Card', 'Available'),
-    ('TXN009', 640.00, '2024-10-20 17:00:00', 'Completed', 'Bank Transfer', 'Available'),
-    ('TXN010', 110.00, '2024-11-01 13:15:00', 'Failed', 'Debit Card', 'Not Available');
+    ('TXN001', 100.00, '2024-08-20 14:30:00', 'Completed', 'Credit Card', 'Available',1),
+    ('TXN002', 150.00, '2024-08-22 16:00:00', 'Pending', 'Debit Card', 'Available',2),
+    ('TXN003', 300.00, '2024-09-01 12:00:00', 'Completed', 'Cash', 'Not Available',3),
+    ('TXN004', 220.00, '2024-09-10 09:30:00', 'Failed', 'Bank Transfer', 'Available',4),
+    ('TXN005', 480.00, '2024-09-15 15:00:00', 'Completed', 'Credit Card', 'Available',5),
+    ('TXN006', 100.00, '2024-10-01 10:00:00', 'Completed', 'Cash', 'Available',1),
+    ('TXN007', 300.00, '2024-10-05 11:30:00', 'Pending', 'Debit Card', 'Not Available',2),
+    ('TXN008', 150.00, '2024-10-10 14:45:00', 'Completed', 'Credit Card', 'Available',3),
+    ('TXN009', 640.00, '2024-10-20 17:00:00', 'Completed', 'Bank Transfer', 'Available',4),
+    ('TXN010', 110.00, '2024-11-01 13:15:00', 'Failed', 'Debit Card', 'Not Available',5);
 	
 	
 select * from transactions
 
+ 
+
+--ALTER TABLE transactions ADD CONSTRAINT fk_transaction FOREIGN KEY (booking_id)
+
+
 -------------------------transactions end here ----------------------------------------------------------------------------
 --------------------------------------Bookings by room -----------------------------------------
-SELECT r.Room_Id, r.Floor, r.Guest_Allowed, 
-       b.Room_Id, b.Booking_Id, b.Room, b.Room_Type, b.Mobile_Number
+SELECT  
+	   b.Booking_Id, 
+	   b.Room, 
+	   b.Room_Type,
+	   b.User_Name,
+	   b.Guest_Allowed,
+	   b.Mobile_Number,
+	   b.Checkin_Day,
+	   b.Checkout_Day,
+	   b.Total_Amount,
+	   b.Amount_Status
 FROM Rooms AS r
 INNER JOIN Bookings AS b
-ON b.Room_Id = r.Room_Id
+ON b.Room_Id = r.Room_Id;
+
+
+
+-------------------transactions screen data---------------------------
+SELECT 
+      b.booking_id,
+	  b.room,
+	  b.room_type,
+	  b.user_name,
+	  b.mobile_number,
+	  t.amount_paid_date as date,
+	  t.amount,
+	  t.status,
+	  t.payment_mode,
+	  t.Transaction_Id
+FROM bookings as b
+INNER JOIN transactions as t on t.booking_id = b.booking_id;
+
+
+---these query will give the required feilds for the transcation screen -----------------------------
+------------------------------------------------------------------------------------------------------------------------------------
