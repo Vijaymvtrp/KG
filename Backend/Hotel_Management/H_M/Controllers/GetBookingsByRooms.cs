@@ -60,18 +60,20 @@ namespace H_M.Controllers
         public async Task<IActionResult> GetRoomBookings()
         {
             var query = @"
-                          SELECT r.Room_Id, 
-                         r.Floor,
-                         r.Guest_Allowed, 
-                         b.Room_Id, 
-                         b.Booking_Id,
-                         b.Room,
-                         b.Room_Type, 
-                         b.Mobile_Number
-                         FROM Rooms AS r
-                         INNER JOIN Bookings AS b
-                         ON b.Room_Id = r.Room_Id;
-    ";
+                          SELECT  
+	                             b.Booking_Id, 
+	                             b.Room, 
+	                             b.Room_Type,
+	                             b.User_Name,
+	                             b.Guest_Allowed,
+	                             b.Mobile_Number,
+	                             b.Checkin_Day,
+	                             b.Checkout_Day,
+	                             b.Total_Amount,
+	                             b.Amount_Status
+                            FROM Rooms AS r
+                            INNER JOIN Bookings AS b
+                            ON b.Room_Id = r.Room_Id;";
 
             // Execute the raw SQL query and map the results directly to the RoomBookings model
             var roomBookingsList = await _Context.RoomBookings

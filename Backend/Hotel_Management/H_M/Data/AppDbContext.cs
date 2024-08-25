@@ -17,11 +17,14 @@ namespace H_M.Data
 
        public DbSet<Transactions> Transactions { get; set; }
 
+      public DbSet<TransactionByRoom> transactionByRooms { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<RoomBookings>()
                 .HasNoKey();
+            modelBuilder.Entity<TransactionByRoom>().HasNoKey();
 
             base.OnModelCreating(modelBuilder);
         }
