@@ -151,3 +151,37 @@ INNER JOIN transactions as t on t.booking_id = b.booking_id;
 
 ---these query will give the required feilds for the transcation screen -----------------------------
 ------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+------------------reminders table --------------------------------------------------------------------------------------------------
+CREATE TABLE reminders (
+    id serial PRIMARY KEY,
+    day_reported timestamp without time zone,
+    category varchar(255),
+    maintenance_type varchar(255),
+    priority varchar(50),
+    reportedby varchar(50),
+    description text
+);
+
+
+INSERT INTO reminders (day_reported, category, maintenance_type, priority, reportedby, description)
+VALUES 
+('2024-08-01 10:00:00', 'Electrical', 'Preventive', 'High', 'John Doe', 'Inspect the generator for any faults.'),
+('2024-08-02 11:30:00', 'Plumbing', 'Corrective', 'Medium', 'Jane Smith', 'Fix the leaking faucet in the kitchen.'),
+('2024-08-03 14:45:00', 'HVAC', 'Preventive', 'Low', 'Alice Brown', 'Routine maintenance of the HVAC system.'),
+('2024-08-04 09:15:00', 'Elevator', 'Emergency', 'High', 'Bob Johnson', 'Elevator stuck between floors, immediate repair needed.'),
+('2024-08-05 13:00:00', 'Electrical', 'Corrective', 'Medium', 'Carol White', 'Replace faulty wiring in the conference room.'),
+('2024-08-06 15:30:00', 'Plumbing', 'Preventive', 'Low', 'David Black', 'Inspect all pipes for potential leaks.'),
+('2024-08-07 10:00:00', 'Fire Safety', 'Emergency', 'High', 'Eve Green', 'Replace expired fire extinguishers.'),
+('2024-08-08 12:45:00', 'HVAC', 'Corrective', 'Medium', 'Frank Blue', 'Repair air conditioning in the server room.'),
+('2024-08-09 14:00:00', 'Elevator', 'Preventive', 'Low', 'Grace Red', 'Routine inspection of elevator cables.'),
+('2024-08-10 11:30:00', 'Electrical', 'Emergency', 'High', 'Henry Yellow', 'Power outage in building, restore electricity.');
+
+
+select * from reminders
+
+
+
+-----------reminders table end ----------------------------
