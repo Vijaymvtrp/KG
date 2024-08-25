@@ -13,14 +13,34 @@
         display: flex;
         gap: 10px;
         margin: 20px 0;
+        
         img{
           
           width: 25px;
         }
+        &.active {
+          border-left: 4px solid #0023C4; 
+          font-weight: 500;
+          border-radius: 4px;
+          padding-left: 4px;
+          align-items: center;
+          .icon{
+            filter: invert(35%) sepia(83%) saturate(6665%) hue-rotate(265deg) brightness(72%) contrast(92%);
+          }
+          .anchor{
+            color: #0023C4;
+          }
+        }
       }
+
     }
     .contentArea{
-      width: 80%;
+      width: 83%;
+      padding: 15px;
+      height: 90vh;
+      overflow: auto;
     }
   }
 }
+
+

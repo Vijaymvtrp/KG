@@ -1,12 +1,57 @@
-body{
+body {
     background-color: #F5F7FA;
     overflow: hidden;
     font-family: 'Poppins' !important;
-a{
-    text-decoration: none;
-    color: #605F5F;
+
+    a {
+        text-decoration: none;
+        color: #605F5F;
+        font-size: 14px;
+    }
 }
-}
-.container{
+
+.container {
     padding: 0;
+}
+
+.mainContainer {
+    .container {
+        .topSection {
+            position: relative;
+            display: flex;
+
+            .titleSection {
+                flex: 1
+            }
+
+            ;
+
+            .btnSection {
+                display: flex;
+                gap: 10px;
+            }
+
+            .title {
+                font-size: 20px;
+                font-weight: 700;
+                color: #343C6A;
+            }
+        }
+
+        .secondSection {
+            margin-top: 16px;
+
+            .title {
+                font-size: 17px;
+                font-weight: 600;
+                color: #343C6A;
+            }
+            .tabSection{
+                .mat-mdc-tab{
+                    padding: 0 !important;
+                }
+            }
+            
+        }
+    }
 }

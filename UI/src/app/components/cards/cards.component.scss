@@ -1,0 +1,56 @@
+.mainContainer {
+    .container{
+        display: flex;
+        position: relative;
+        gap: 10px;
+    .mat-mdc-card {
+        .mat-mdc-card-title {
+            font-family: 'Poppins' !important;
+            color: #0023c4;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        align-items: center;
+        width: 20%;
+        filter: drop-shadow(2px 2px 4px #0000001d);
+        border-radius: 8px;
+        border: none;
+
+        .mat-mdc-card-header {
+            padding: 5px;
+        }
+
+        .mat-mdc-card-content {
+            display: flex;
+            gap: 15px;
+            position: relative;
+            align-items: center;
+            padding-bottom: 5px;
+
+            .icon {
+                position: relative;
+                background: #0023c4;
+                border-radius: 30px;
+                padding: 3px;
+
+                img {
+                    max-width: 27px;
+                }
+            }
+
+            .count {
+                font-size: 35px;
+                font-weight: 600;
+                color: #0023c4;
+            }
+
+            .view {
+                font-size: 14px;
+                font-weight: 600;
+                color: #0023c4;
+            }
+        }
+    }
+}
+}
