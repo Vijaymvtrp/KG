@@ -2,12 +2,14 @@
 using H_M.Data;
 using H_M.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 
 namespace H_M.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowAllOrigins")]
     public class GetRoomsController : ControllerBase
     {
         private readonly AppDbContext _context;

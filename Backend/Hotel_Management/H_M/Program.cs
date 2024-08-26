@@ -17,6 +17,16 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"))
            .UseSnakeCaseNamingConvention());
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder
+            .AllowAnyOrigin()    // Allow requests from any origin
+            .AllowAnyMethod()    // Allow any HTTP method (GET, POST, etc.)
+            .AllowAnyHeader());  // Allow any header
+});
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -30,6 +40,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
