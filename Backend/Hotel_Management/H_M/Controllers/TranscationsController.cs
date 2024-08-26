@@ -1,5 +1,6 @@
 ﻿using H_M.Data;
 using H_M.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace H_M.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [EnableCors("AllowAllOrigins")]
     public class TranscationsController : ControllerBase
     {
         private readonly AppDbContext _context;
