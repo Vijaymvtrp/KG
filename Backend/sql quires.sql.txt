@@ -26,6 +26,11 @@ VALUES
     (5, 'Suite', 4, 'Available', 310.00, 31.00, 15.00, 'Yes'),
     (5, 'Single', 1, 'Occupied', 130.00, 13.00, 5.00, 'No');
 
+Alter table rooms 
+add column amenites json ;
+
+update  rooms set amenites =('{"wifi": true, "air_conditioning": true, "tv": true, "minibar": true, "coffee_maker": false}') where room_id=1
+
 
 select * from rooms
 ------------------------------------Rooms table end -------------------------------------------------------------------------------------------
@@ -185,3 +190,31 @@ select * from reminders
 
 
 -----------reminders table end ----------------------------
+
+----------------Admin table --------------------------------------
+
+CREATE TABLE admin (
+    ID SERIAL PRIMARY KEY,
+    ROLE_NAME VARCHAR(255),
+    CREATE_TIME TIMESTAMP WITHOUT TIME ZONE,
+    UPDATE_TIME TIMESTAMP WITHOUT TIME ZONE,
+    TYPE VARCHAR(255),
+    EMAIL TEXT NOT NULL,
+	PASSWORD TEXT NOT NULL,
+	STATUS BOOL NOT NULL,
+	MOBILE_NUMBER NUMERIC(10,0),
+	COMPANY VARCHAR(255),
+	GST VARCHAR(10),
+	ADDRESS JSON	
+);
+
+INSERT INTO admin (ROLE_NAME, CREATE_TIME, UPDATE_TIME, TYPE, EMAIL, PASSWORD, STATUS, MOBILE_NUMBER, COMPANY, GST, ADDRESS) VALUES
+('Admin', NOW(), NOW(), 'Super', 'admin@example.com', 'password123', TRUE, 9876543210, 'Example Corp', 'GST1234567', '{"street": "123 Main St", "city": "Example City", "state": "EX", "zip": "12345"}'),
+('Manager', NOW(), NOW(), 'Regular', 'manager@example.com', 'password456', TRUE, 8765432109, 'Example Corp', 'GST7654321', '{"street": "456 Elm St", "city": "Example City", "state": "EX", "zip": "54321"}'),
+('User', NOW(), NOW(), 'Basic', 'user@example.com', 'password789', FALSE, 7654321098, 'Example Corp', 'GST9876543', '{"street": "789 Oak St", "city": "Example City", "state": "EX", "zip": "67890"}');
+
+
+SELECT * FROM ADMIN
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
